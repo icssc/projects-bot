@@ -1,15 +1,25 @@
 {
-    "name": "projects-bot",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "deploy": "wrangler deploy",
-        "dev": "wrangler dev",
-        "cf-typegen": "wrangler types"
-    },
-    "devDependencies": {
-        "@types/node": "^25.3.0",
-        "typescript": "^5.5.2",
-        "wrangler": "^4.68.0"
-    }
+  "name": "projects-bot",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "cf-typegen": "wrangler types",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.0",
+    "@types/node": "^25.3.0",
+    "lefthook": "^2.1.1",
+    "typescript": "^5.5.2",
+    "ultracite": "7.2.3",
+    "wrangler": "^4.68.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "hono": "^4.12.2"
+  }
 }
