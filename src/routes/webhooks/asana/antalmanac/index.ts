@@ -4,7 +4,7 @@ import {
   AsanaTaskAddedEvent,
   fetchAsanaTask,
 } from "@/lib/webhooks/asana";
-import { parseSubmission } from "./types";
+import { parseSubmission } from "@/lib/webhooks/asana/antalmanac";
 
 const app = new Hono<{
   Bindings: CloudflareBindings;

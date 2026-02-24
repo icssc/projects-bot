@@ -22,15 +22,11 @@ export type AsanaTaskAddedEvent = z.infer<typeof AsanaTaskAddedEvent>;
 
 const AsanaCustomField = z.object({
   gid: z.string(),
-  name: z.string(),
-  type: z.string(),
   display_value: z.string().nullable(),
 });
 
 export const AsanaTask = z.object({
   gid: z.string(),
-  name: z.string(),
-  notes: z.string(),
   permalink_url: z.string(),
   custom_fields: z.array(AsanaCustomField),
 });
@@ -48,15 +44,7 @@ export async function fetchAsanaTask({
   const url = new URL(`${ASANA_API_BASE}/tasks/${taskGid}`);
   url.searchParams.set(
     "opt_fields",
-    [
-      "name",
-      "notes",
-      "permalink_url",
-      "custom_fields",
-      "custom_fields.name",
-      "custom_fields.display_value",
-      "custom_fields.type",
-    ].join(",")
+    ["permalink_url", "custom_fields", "custom_fields.display_value"].join(",")
   );
 
   const res = await fetch(url, {
