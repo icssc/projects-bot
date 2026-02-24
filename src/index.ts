@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import asana from "./routes/webhooks/asana";
+import { webhooksAsanaRoutes } from "@/routes/webhooks/asana";
 
 const app = new Hono();
 
 app.get("/", (c) => c.text("Hello World!"));
-app.route("/webhooks/asana", asana);
+app.route("/webhooks/asana", webhooksAsanaRoutes);
 
 export default app;

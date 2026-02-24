@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { AsanaTaskAddedEvent } from "@/lib/webhooks/asana";
 
 const app = new Hono<{
   Bindings: CloudflareBindings;
@@ -7,8 +8,18 @@ const app = new Hono<{
 
 app.post("/", (c) => {
   const events = c.get("asanaEvents");
-  console.log("AntAlmanac events:", JSON.stringify(events));
+
+  for (const event of events) {
+    const parsed = AsanaTaskAddedEvent.safeParse(event);
+
+    if (!parsed.success) {
+      continue;
+    }
+
+    console.log("New task added:", parsed.data.resource.gid);
+  }
+
   return c.body(null, 200);
 });
 
-export default app;
+export const webhooksAsanaAntalmanacRoutes = app;
