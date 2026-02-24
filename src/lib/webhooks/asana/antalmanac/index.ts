@@ -19,14 +19,7 @@ export const AntalmanacSubmission = z.object({
   type: z.enum(["Question", "Feature request", "Comment", "Bug"]),
   message: z.string(),
   followup: z.enum(["Yes", "No"]).nullable(),
-  whereIsTheBug: z
-    .array(
-      z.enum([
-        "AntAlmanac Scheduler (https://antalmanac.com)",
-        "AntAlmanac Planner (https://antalmanac.com/planner)",
-      ])
-    )
-    .nullable(),
+  whereIsTheBug: z.string().nullable(),
   whatIsTheBug: z
     .enum([
       "Cannot login to application",

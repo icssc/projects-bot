@@ -1,10 +1,12 @@
 import { Hono } from "hono";
+import { createForumThread } from "@/lib/discord/client";
 import {
   AsanaTask,
   AsanaTaskAddedEvent,
   fetchAsanaTask,
 } from "@/lib/webhooks/asana";
 import { parseSubmission } from "@/lib/webhooks/asana/antalmanac";
+import { buildEmbed } from "@/lib/webhooks/asana/antalmanac/discord";
 
 const app = new Hono<{
   Bindings: CloudflareBindings;
@@ -33,9 +35,14 @@ app.post("/", async (c) => {
     });
     const task = AsanaTask.parse(raw);
     const submission = parseSubmission(task);
+    const embed = buildEmbed(submission);
 
-    // TODO: send to Discord
-    console.log("New feedback:", submission);
+    await createForumThread({
+      channelId: c.env.ANTALMANAC_DISCORD_FORUM_CHANNEL_ID,
+      botToken: c.env.DISCORD_BOT_TOKEN,
+      name: `[${submission.type}] ${submission.name ?? "Anonymous"}`,
+      embeds: [embed],
+    });
   }
 
   return c.body(null, 200);
