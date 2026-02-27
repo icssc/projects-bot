@@ -3,7 +3,7 @@ import type { AntalmanacSubmission } from "@/lib/webhooks/asana/antalmanac";
 
 export function buildEmbed(submission: AntalmanacSubmission): APIEmbed {
   const fields = [
-    { name: "Type", value: submission.type, inline: true },
+    { name: "Type", value: submission.type },
     {
       name: "Name",
       value: submission.name ?? "Anonymous",

@@ -6,10 +6,10 @@ declare namespace Cloudflare {
 		mainModule: typeof import("./src/index");
 	}
 	interface Env {
+		ANTALMANAC_DISCORD_FORUM_CHANNEL_ID: string;
 		ASANA_PAT_SECRET: string;
 		ASANA_WEBHOOK_SECRET: string;
 		DISCORD_BOT_TOKEN: string;
-		ANTALMANAC_DISCORD_FORUM_CHANNEL_ID: string;
 	}
 }
 interface CloudflareBindings extends Cloudflare.Env {}
