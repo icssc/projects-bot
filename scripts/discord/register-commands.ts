@@ -1,10 +1,11 @@
 /**
- * One-time script to register slash commands with Discord.
- * Make sure to use Node 24 or newer.
- * Run with: node --env-file=.dev.vars --experimental-strip-types scripts/discord/register-commands.ts
+ * Register slash commands with Discord.
+ * Run: node --env-file=.dev.vars --experimental-strip-types scripts/discord/register-commands.ts
+ *
+ * Command definitions are sourced from src/lib/discord/commands/definitions.ts.
  */
 
-export {};
+import { commandDefinitions } from "../../src/lib/discord/commands/definitions.ts";
 
 const APPLICATION_ID = process.env.DISCORD_APPLICATION_ID;
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -17,14 +18,6 @@ if (!(APPLICATION_ID && BOT_TOKEN)) {
   process.exit(1);
 }
 
-const commands = [
-  {
-    name: "create-issue",
-    description: "Create a GitHub issue from Discord",
-    type: 1,
-  },
-];
-
 const res = await fetch(
   `https://discord.com/api/v10/applications/${APPLICATION_ID}/guilds/${GUILD_ID}/commands`,
   {
@@ -33,7 +26,7 @@ const res = await fetch(
       Authorization: `Bot ${BOT_TOKEN}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(commands),
+    body: JSON.stringify(commandDefinitions),
   }
 );
 

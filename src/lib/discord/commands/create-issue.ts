@@ -43,18 +43,12 @@ function getModalValue(
 }
 
 export const createIssueCommand = {
-  definition: {
-    name: "create-issue",
-    description: "Create a GitHub issue from Discord",
-    type: 1,
-  },
-
   handleCommand() {
     return {
       type: 9, // MODAL
       data: {
         custom_id: "create-issue-modal",
-        title: "Create GitHub Issue",
+        title: "[BETA] Create GitHub Issue",
         components: [
           {
             type: 18, // Label
