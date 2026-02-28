@@ -1,12 +1,8 @@
 import { Hono } from "hono";
+import { AsanaTask, AsanaTaskAddedEvent, fetchAsanaTask } from "@/lib/asana";
+import { parseSubmission } from "@/lib/asana/webhooks/antalmanac";
+import { buildEmbed } from "@/lib/asana/webhooks/antalmanac/discord";
 import { createForumThread } from "@/lib/discord/client";
-import {
-  AsanaTask,
-  AsanaTaskAddedEvent,
-  fetchAsanaTask,
-} from "@/lib/webhooks/asana";
-import { parseSubmission } from "@/lib/webhooks/asana/antalmanac";
-import { buildEmbed } from "@/lib/webhooks/asana/antalmanac/discord";
 
 const app = new Hono<{
   Bindings: CloudflareBindings;
@@ -48,4 +44,4 @@ app.post("/", async (c) => {
   return c.body(null, 200);
 });
 
-export const webhooksAsanaAntalmanacRoutes = app;
+export const antalmanacWebhookRoutes = app;

@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { createMiddleware } from "hono/factory";
-import { webhooksAsanaAntalmanacRoutes } from "@/routes/webhooks/asana/antalmanac";
+import { antalmanacWebhookRoutes } from "@/routes/asana/webhooks/antalmanac";
 
 interface AsanaEnv {
   Bindings: CloudflareBindings;
@@ -45,6 +45,6 @@ const asanaWebhook = createMiddleware<AsanaEnv>(async (c, next) => {
 const app = new Hono<AsanaEnv>();
 
 app.use("/*", asanaWebhook);
-app.route("/antalmanac", webhooksAsanaAntalmanacRoutes);
+app.route("/antalmanac", antalmanacWebhookRoutes);
 
-export const webhooksAsanaRoutes = app;
+export const asanaWebhookRoutes = app;

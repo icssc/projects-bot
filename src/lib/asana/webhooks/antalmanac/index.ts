@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { AsanaTask } from "@/lib/webhooks/asana";
+import type { AsanaTask } from "@/lib/asana";
 
 const FIELD_GIDS = {
   name: "1208889653506818",
