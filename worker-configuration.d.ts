@@ -6,14 +6,14 @@ declare namespace Cloudflare {
 		mainModule: typeof import("./src/index");
 	}
 	interface Env {
-		ASANA_PAT_SECRET: string;
 		ASANA_APP_CLIENT_ID: string;
 		ASANA_APP_CLIENT_SECRET: string;
+		ASANA_PAT_SECRET: string;
+		ASANA_WEBHOOK_SECRET: string;
+		DISCORD_APPLICATION_ID: string;
 		DISCORD_BOT_TOKEN: string;
 		DISCORD_PUBLIC_KEY: string;
-		DISCORD_APPLICATION_ID: string;
 		GITHUB_PAT_SECRET: string;
-		ASANA_WEBHOOK_SECRET: string;
 	}
 }
 interface CloudflareBindings extends Cloudflare.Env {}

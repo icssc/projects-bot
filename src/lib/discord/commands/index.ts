@@ -7,6 +7,8 @@ export const GITHUB_REPOS = [
     value: "peterportal-client",
   },
   { label: "Anteater API (anteater-api)", value: "anteater-api" },
+  { label: "PeterPlate (PeterPlate)", value: "PeterPlate" },
+  { label: "ZotMeet (ZotMeet)", value: "ZotMeet" },
 ] as const;
 
 export const GITHUB_OWNER = "icssc";
