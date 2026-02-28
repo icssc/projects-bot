@@ -1,5 +1,5 @@
 import type { APIEmbed } from "discord.js";
-import type { AntalmanacSubmission } from "@/lib/asana/webhooks/antalmanac";
+import type { AntalmanacSubmission } from "@/lib/asana/antalmanac";
 
 export function buildEmbed(submission: AntalmanacSubmission): APIEmbed {
   const fields = [

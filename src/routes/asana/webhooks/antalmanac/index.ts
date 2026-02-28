@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { AsanaTask, AsanaTaskAddedEvent, fetchAsanaTask } from "@/lib/asana";
-import { parseSubmission } from "@/lib/asana/webhooks/antalmanac";
-import { buildEmbed } from "@/lib/asana/webhooks/antalmanac/discord";
+import { parseSubmission } from "@/lib/asana/antalmanac";
+import { buildEmbed } from "@/lib/asana/antalmanac/discord";
+import { asanaClients } from "@/lib/asana/clients";
 import { createForumThread } from "@/lib/discord/client";
 
 const app = new Hono<{
@@ -34,7 +35,7 @@ app.post("/", async (c) => {
     const embed = buildEmbed(submission);
 
     await createForumThread({
-      channelId: c.env.ANTALMANAC_DISCORD_FORUM_CHANNEL_ID,
+      channelId: asanaClients.antalmanac.discordForumChannelId,
       botToken: c.env.DISCORD_BOT_TOKEN,
       name: `[${submission.type}] ${submission.name ?? "Anonymous"}`,
       embeds: [embed],
