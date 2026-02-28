@@ -1,5 +1,5 @@
-export const asanaClients = {
+export const CLIENTS = {
   antalmanac: {
-    discordForumChannelId: "TODO: paste channel ID here",
+    discordForumChannelId: "1320321362916540467",
   },
-} as const;
+} as const satisfies Record<string, Record<string, string>>;
