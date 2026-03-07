@@ -94,15 +94,29 @@ app.post("/run", async (c) => {
   const submission = parseSubmission(task);
   const embed = buildEmbed(submission);
 
+  const { forumTags } = ASANA_CLIENTS.antalmanac;
+  const tags: string[] = [];
+  if (submission.type in forumTags.type) {
+    tags.push(forumTags.type[submission.type]);
+  }
+  if (submission.whereIsTheBug) {
+    for (const [name, tagId] of Object.entries(forumTags.product)) {
+      if (submission.whereIsTheBug.includes(name)) {
+        tags.push(tagId);
+      }
+    }
+  }
+
   await createForumThread({
     channelId: ASANA_CLIENTS.antalmanac.discordForumChannelId,
     botToken: c.env.DISCORD_BOT_TOKEN,
-    name: `[${submission.type}] ${submission.name ?? "Anonymous"}`,
+    name: `${submission.name ?? "Anonymous"}`,
     embeds: [embed],
+    appliedTags: tags,
     components: [
       {
-        type: 2, // Button
-        style: 5, // Link
+        type: 2,
+        style: 5,
         label: "View in Asana",
         url: submission.url,
       },

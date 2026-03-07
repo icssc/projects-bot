@@ -54,6 +54,14 @@ app.post("/", async (c) => {
         name: `${submission.name ?? "Anonymous"}`,
         embeds: [embed],
         appliedTags: tags,
+        components: [
+          {
+            type: 2,
+            style: 5,
+            label: "View in Asana",
+            url: submission.url,
+          },
+        ],
       });
     } catch (err) {
       console.error(`Failed to process task ${gid}:`, err);
