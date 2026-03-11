@@ -23,7 +23,7 @@ export function buildEmbed(submission: AntalmanacSubmission): APIEmbed {
 
   if (submission.whereIsTheBug) {
     fields.push({
-      name: "Where is the bug?",
+      name: "Which apps do your feedback apply to?",
       value: submission.whereIsTheBug,
       inline: false,
     });
