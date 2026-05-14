@@ -34,6 +34,20 @@ export const AntalmanacSubmission = z.object({
 
 export type AntalmanacSubmission = z.infer<typeof AntalmanacSubmission>;
 
+const DISCORD_THREAD_NAME_MAX_LEN = 100;
+
+/** Forum thread name: start of the feedback message (Discord allows 1–100 characters). */
+export function discordForumThreadTitle(submission: AntalmanacSubmission): string {
+  const normalized = submission.message.trim().replace(/\s+/g, " ");
+  if (normalized.length === 0) {
+    return submission.type;
+  }
+  if (normalized.length <= DISCORD_THREAD_NAME_MAX_LEN) {
+    return normalized;
+  }
+  return `${normalized.slice(0, DISCORD_THREAD_NAME_MAX_LEN - 1)}…`;
+}
+
 export function parseSubmission(task: AsanaTask): AntalmanacSubmission {
   const field = (gid: string) =>
     task.custom_fields.find((f) => f.gid === gid)?.display_value ?? null;
